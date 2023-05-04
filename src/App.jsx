@@ -10,13 +10,30 @@ function App() {
       setTodos([
         ...todos,
         {
-          id: new Date().toISOString,
+          id: new Date().toISOString(),
           text,
           complited: false,
         },
       ]);
       setText("");
     }
+  };
+
+  const toggleTodoCompited = (id) => {
+    setTodos(
+      todos.map((todo) => {
+        if (todo.id !== id) return todo;
+
+        return {
+          ...todo,
+          complited: !todo.complited,
+        };
+      })
+    );
+  };
+
+  const removeTodo = (todoId) => {
+    setTodos(todos.filter((todo) => todo.id !== todoId));
   };
 
   return (
@@ -28,9 +45,15 @@ function App() {
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={todo.complited}
+              onChange={() => toggleTodoCompited(todo.id)}
+            />
             <span>{todo.text}</span>
-            <span className="delete">&times;</span>
+            <span className="delete" onClick={() => removeTodo(todo.id)}>
+              &times;
+            </span>
           </li>
         ))}
       </ul>
