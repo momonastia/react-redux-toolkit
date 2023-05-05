@@ -14,23 +14,10 @@ function App() {
     setText("");
   };
 
-  const toggleTodoCompited = (id) => {
-    /* setTodos(
-      todos.map((todo) => {
-        if (todo.id !== id) return todo;
-
-        return {
-          ...todo,
-          complited: !todo.complited,
-        };
-      })
-    ); */
-  };
-
   return (
     <div className="App">
       <InputField text={text} handleSubmit={addTask} handleInput={setText} />
-      <TodoList toggleTodoCompited={toggleTodoCompited} />
+      <TodoList />
     </div>
   );
 }
